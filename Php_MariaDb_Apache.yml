@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: TuContraseñaMuySegura123!
+      MARIADB_DATABASE: mi_base_de_datos
+      MARIADB_USER: mi_usuario
+      MARIADB_PASSWORD: ContraseñaDeUsuario123*
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: unless-stopped
+
+  apache-php:
+    image: php:8.2-apache
+    ports:
+      - "5525:80"
+    volumes:
+      - C:/Users/Alan/PhpstormProjects:/var/www/html
+    environment:
+      PHP_INI_MEMORY_LIMIT: 256M
+      PHP_INI_UPLOAD_MAX_FILESIZE: 100M
+      PHP_INI_POST_MAX_SIZE: 100M
+    restart: always
+
+volumes:
+  mariadb_data:
+  
+  

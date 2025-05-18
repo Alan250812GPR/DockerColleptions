@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mariadb:
+    # Imagen oficial de MariaDB. Puedes especificar una versión exacta si lo deseas,
+    # por ejemplo: mariadb:10.11 o mariadb:11.3
+    image: mariadb:latest
+    # Variables de entorno para configurar MariaDB
+    environment:
+      # Establece la contraseña para el usuario root de MariaDB.
+      # ¡¡CAMBIA ESTO por una contraseña segura en un entorno real!!
+      MARIADB_ROOT_PASSWORD: TuContraseñaMuySegura123!
+      # Opcional: Crea una base de datos inicial al arrancar el contenedor.
+      MARIADB_DATABASE: mi_base_de_datos
+      # Opcional: Crea un usuario específico para esa base de datos.
+      MARIADB_USER: mi_usuario
+      
+      MARIADB_PASSWORD: ContraseñaDeUsuario123*
+   
+    ports:
+      - "3306:3306"
+    
+    volumes:
+      - mariadb_data:/var/lib/mysql
+   
+    restart: unless-stopped
+
+
+volumes:
+  mariadb_data:

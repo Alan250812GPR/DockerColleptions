@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  apache-php:
+    image: php:8.2-apache
+    ports:
+      - "5525:5525"
+    volumes:
+      - C:/Users/Alan/PhpstormProjects:/var/www/html
+    environment:
+      PHP_INI_MEMORY_LIMIT: 256M
+      PHP_INI_UPLOAD_MAX_FILESIZE: 100M
+      PHP_INI_POST_MAX_SIZE: 100M
+    restart: always

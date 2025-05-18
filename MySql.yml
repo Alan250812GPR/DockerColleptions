@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    # Imagen oficial de MySQL. Puedes especificar una versión exacta,
+    # por ejemplo: mysql:8.0, mysql:8.3, etc.
+    image: mysql:latest
+    # Variables de entorno para configurar MySQL
+    environment:
+      # Establece la contraseña para el usuario root de MySQL.
+      # ¡¡OBLIGATORIO y CAMBIA ESTO por una contraseña segura!!
+      MYSQL_ROOT_PASSWORD: TuContraseñaRootMuySegura456!
+      # Opcional: Crea una base de datos inicial al arrancar.
+      MYSQL_DATABASE: mi_base_mysql
+      # Opcional: Crea un usuario específico para esa base de datos.
+      MYSQL_USER: mi_usuario_mysql
+      # Opcional: Establece la contraseña para el usuario creado.
+      # ¡¡CAMBIA ESTO también por una contraseña segura!!
+      MYSQL_PASSWORD: ContraseñaUsuarioMysql123*
+    # Mapeo de puertos: expone el puerto 3306 de MySQL en el contenedor
+    # al puerto 3306 de tu máquina host. Cambia el puerto del host
+    # si el 3306 ya está en uso (ej. "3308:3306").
+    ports:
+      - "3306:3306"
+    # Volúmenes para persistencia de datos:
+    # Mapea el volumen nombrado 'mysql_data' al directorio de datos
+    # por defecto dentro del contenedor MySQL (/var/lib/mysql).
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # Opcional: Reinicia el contenedor automáticamente si falla.
+    restart: unless-stopped
+
+# Declara el volumen nombrado que se usará para persistir los datos de MySQL.
+volumes:
+  mysql_data:
